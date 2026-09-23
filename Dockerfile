@@ -4,6 +4,9 @@ RUN apt-get install -y \
   curl \
   nginx
 
-RUN echo lunchbreak > /var/www/html/index.html
+COPY start.sh /start.sh
+RUN chmod +x /start.sh
 
-CMD ["nginx", "-g", "daemon off;"]
+EXPOSE 80
+CMD ["/start.sh"]
+# ne irj bele lecci
