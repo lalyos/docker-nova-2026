@@ -1,8 +1,12 @@
 services:
   coffee:
-    image: lunch:v6
+    build: 
+      tags:
+      - lunch
+      - lunch:dev
     environment:
-    - MESSAGE=coffeebreak for lalyos
+    - MESSAGE=${MESSAGE:-welcome}
+    - COLOR=${COLOR:-gray}
     ports:
     - 80
      
