@@ -1,0 +1,23 @@
+services:
+  coffee:
+    image: lunch:v6
+    environment:
+    - MESSAGE=coffeebreak for lalyos
+    ports:
+    - 80
+     
+  mydb:
+    image: postgres
+    environment:
+    - POSTGRES_PASSWORD=s3cr3t
+    volumes:
+    - vip:/var/lib/postgresql
+    - ./sql:/docker-entrypoint-initdb.d
+
+  adminer:
+    image: adminer
+    ports:
+    - 8080
+
+volumes:
+  vip: 
