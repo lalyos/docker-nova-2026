@@ -1,15 +1,16 @@
+name: ${ENV:-dev}
 services:
   coffee:
     build: 
       tags:
       - lunch
       - lunch:dev
+    env_file: .env.${ENV:-dev}
     environment:
-    - MESSAGE=${MESSAGE:-welcome}
-    - COLOR=${COLOR:-gray}
+    - VIRTUAL_HOST=coffee.${ENV:-dev}.lvh.me
     ports:
     - 80
-     
+
   mydb:
     image: postgres
     environment:
@@ -20,8 +21,15 @@ services:
 
   adminer:
     image: adminer
+    environment:
+    - VIRTUAL_HOST=adminer.${ENV:-dev}.lvh.me
     ports:
     - 8080
 
 volumes:
   vip: 
+
+networks:
+  default:
+    external: true
+    name: infra
